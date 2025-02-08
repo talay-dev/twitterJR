@@ -1,0 +1,146 @@
+/* Light mode styles */
+:root {
+    --bg-color: #ffffff;
+    --text-color: #212529;
+    --card-bg: #ffffff;
+    --border-color: rgba(0,0,0,.125);
+    --nav-bg: #343a40;
+    --nav-text: #ffffff;
+}
+
+/* Dark mode styles */
+[data-theme="dark"] {
+    --bg-color: #1a1a1a;
+    --text-color: #ffffff;
+    --card-bg: #2d2d2d;
+    --border-color: rgba(255,255,255,.125);
+    --nav-bg: #000000;
+    --nav-text: #ffffff;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.card {
+    background-color: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+.navbar {
+    background-color: var(--nav-bg) !important;
+}
+
+.navbar-brand, .nav-link {
+    color: var(--nav-text) !important;
+}
+
+/* Dark mode toggle button */
+.dark-mode-toggle {
+    background: none;
+    border: none;
+    padding: 0 15px;
+    color: var(--nav-text);
+    cursor: pointer;
+}
+
+.dark-mode-toggle:focus {
+    outline: none;
+}
+
+/* Additional dark mode adjustments */
+[data-theme="dark"] .card-text {
+    color: #f1f1f1;
+}
+
+[data-theme="dark"] .text-muted {
+    color: #a0a0a0 !important;
+}
+
+[data-theme="dark"] .btn-outline-primary {
+    color: #ffffff;
+    border-color: #0d6efd;
+}
+
+[data-theme="dark"] .form-control {
+    background-color: #333;
+    border-color: #444;
+    color: #ffffff;
+}
+
+[data-theme="dark"] .form-control:focus {
+    background-color: #404040;
+    color: #ffffff;
+}
+
+/* Profile image styles */
+.profile-img {
+    border: 4px solid #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.profile-img:hover {
+    transform: scale(1.05);
+}
+
+[data-theme="dark"] .profile-img {
+    border-color: #2d3436;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Small profile pictures in tweets */
+.tweet-profile-img {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #fff;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .tweet-profile-img {
+    border-color: #2d3436;
+}
+
+/* Like button styles */
+.like-button {
+    color: #6c757d;
+    transition: all 0.2s ease;
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
+.like-button:hover {
+    color: #dc3545;
+    background-color: rgba(220, 53, 69, 0.1);
+}
+
+.like-button.liked {
+    color: #dc3545;
+}
+
+.like-button.liked:hover {
+    color: #6c757d;
+}
+
+.like-button i {
+    margin-right: 5px;
+}
+
+[data-theme="dark"] .like-button {
+    color: #adb5bd;
+}
+
+[data-theme="dark"] .like-button:hover {
+    color: #dc3545;
+    background-color: rgba(220, 53, 69, 0.2);
+}
+
+[data-theme="dark"] .like-button.liked {
+    color: #dc3545;
+}
+
+[data-theme="dark"] .like-button.liked:hover {
+    color: #adb5bd;
+}

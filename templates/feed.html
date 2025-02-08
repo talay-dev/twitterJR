@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Feed{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Tweet Feed</h2>
+            <a href="{{ url_for('write_tweet') }}" class="btn btn-primary">Write New Tweet</a>
+        </div>
+
+        <!-- Tweets Display -->
+        {% if tweets %}
+            {% for tweet in tweets %}
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <h6 class="card-subtitle mb-2 text-muted">
+                                <a href="{{ url_for('profile', username=tweet.author) }}" class="text-decoration-none text-muted">
+                                    {{ tweet.author }}
+                                </a>
+                                {% if tweet.is_own_tweet %}
+                                    <span class="badge bg-secondary">You</span>
+                                {% endif %}
+                            </h6>
+                            <small class="text-muted">
+                                {{ tweet.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}
+                            </small>
+                        </div>
+                        <p class="card-text">{{ tweet.content }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <button class="btn btn-link text-decoration-none like-button {% if tweet.is_liked_by %}liked{% endif %}"
+                                    data-tweet-id="{{ tweet.id }}">
+                                <i class="fas fa-heart"></i>
+                                <span class="like-count">{{ tweet.likes }}</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="text-muted">No tweets yet. Be the first to tweet!</p>
+        {% endif %}
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/likes.js') }}"></script>
+{% endblock %}

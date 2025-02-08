@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="text-center mb-4">
+                    <img src="{{ url_for('static', filename='profile_pics/' + user.profile_picture) }}" 
+                         class="rounded-circle profile-img mb-3" 
+                         alt="Profile Picture"
+                         style="width: 200px; height: 200px; object-fit: cover;">
+                    <h2>{{ user.username }}</h2>
+                    {% if user.bio %}
+                        <p class="lead">{{ user.bio }}</p>
+                    {% endif %}
+                    <p class="text-muted">Member since {{ user.created_at.strftime('%B %Y') }}</p>
+                    {% if user == current_user %}
+                        <a href="{{ url_for('edit_profile') }}" class="btn btn-primary">Edit Profile</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <h3 class="mb-4">Tweets</h3>
+        {% if tweets %}
+            {% for tweet in tweets %}
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <h6 class="card-subtitle mb-2 text-muted">
+                                {{ tweet.author.username }}
+                                {% if tweet.author == current_user %}
+                                    <span class="badge bg-secondary">You</span>
+                                {% endif %}
+                            </h6>
+                            <small class="text-muted">
+                                {{ tweet.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}
+                            </small>
+                        </div>
+                        <p class="card-text">{{ tweet.content }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <button class="btn btn-link text-decoration-none like-button {% if tweet.is_liked_by(current_user) %}liked{% endif %}"
+                                    data-tweet-id="{{ tweet.id }}">
+                                <i class="fas fa-heart"></i>
+                                <span class="like-count">{{ tweet.likes|length }}</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="text-muted">No tweets yet.</p>
+        {% endif %}
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/likes.js') }}"></script>
+{% endblock %}

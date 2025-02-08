@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <h2>Welcome, {{ current_user.username }}!</h2>
+        
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Write a Tweet</h5>
+                        <p class="card-text">Share your thoughts with the world!</p>
+                        <a href="{{ url_for('write_tweet') }}" class="btn btn-primary">Write Tweet</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">View Feed</h5>
+                        <p class="card-text">See what others are tweeting about!</p>
+                        <a href="{{ url_for('feed') }}" class="btn btn-primary">Go to Feed</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
